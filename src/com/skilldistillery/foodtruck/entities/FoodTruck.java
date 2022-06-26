@@ -59,8 +59,10 @@ public class FoodTruck {
 
 	@Override
 	public String toString() {
-		return "FoodTruck [rating=" + rating + ", nameTruck=" + nameTruck + ", foodType=" + foodType + ", idNum="
-				+ idNum + "]";
+		return "FoodTruck [Name:  " + nameTruck + 
+				", Type Of Food: " + foodType + 
+				", Rating: " + rating +
+				", ID: "+ idNum + "]";
 	}
 
 	

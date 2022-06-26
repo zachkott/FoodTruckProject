@@ -8,16 +8,15 @@ public class FoodTruckApp {
 	Scanner sc = new Scanner(System.in);
 	FoodTruck[] foodTrucks = new FoodTruck[5];
 	FoodTruck truck;
-	int rating;
-	int count = 0;
-	int userInput = 1;
-	int highestRate;
-	double averageRate;
+	private int rating;
+	private int count = 0;
+	private int userInput = 1;
+	private int highestRate;
+	private double averageRate;
 
 	public static void main(String[] args) {
 		FoodTruckApp fta = new FoodTruckApp();
 		fta.welcome();
-		
 
 		// Welcome message *possibly change this to a method and call the method
 		// WelcomeMessage()
@@ -69,8 +68,23 @@ public class FoodTruckApp {
 
 		String name;
 		String foodType;
+		String nextTruck;
+		String response;
 
 		for (int i = 0; i < foodTrucks.length; i++) {
+			System.out.println();
+			System.out.println("Add a food truck or enter quit to see the main menu (add/quit)");
+			nextTruck = sc.nextLine();
+			
+			if (nextTruck.equalsIgnoreCase("quit")) {
+				mainMenu();
+				
+			} else if(nextTruck.equalsIgnoreCase("add")) {
+			}
+//			} else {
+//				System.out.println("Invalid response. Please use (add/quit)");
+//				nextTruck = sc.nextLine();
+//				}
 
 			System.out.println("Please enter the name of the food truck: \n");
 			name = sc.nextLine();
@@ -79,24 +93,28 @@ public class FoodTruckApp {
 				System.out.println("Please enter the type of food that this truck served: ");
 				foodType = sc.nextLine();
 
-				System.out.println("Please enter a rating based upon the satisfaction of your dining experience \n"
-						+ "The rating system is numerical: \n" + "1: Extremely dissastisfied \n" + "2: Satisfied \n"
-						+ "3: Excellent!");
+				System.out.println("Please enter a rating based upon the satisfaction of your dining experience \n\n"
+						+ "The rating system is numerical: \n\n"
+						+ "1: Extremely dissastisfied \n"
+					    + "2: Satisfied \n"
+						+ "3: Excellent!  \n"
+						+ "4: Perfection!");
 				rating = sc.nextInt();
-				System.out.println("Add another food truck or enter quit to see the main menu");
-				sc.nextLine();
-
-				truck = new FoodTruck(name, foodType, rating);
-				foodTrucks[count] = truck;
 				
+
+				FoodTruck truck = new FoodTruck(name, foodType, rating);
+				foodTrucks[i] = truck;
+
+			}
+			if (nextTruck.equalsIgnoreCase("quit")) {
+				break;
 
 			} else if (name.equalsIgnoreCase("quit")) {
 				break;
-
 			}
 
 		}
-	mainMenu();
+		mainMenu();
 	}
 
 	public void mainMenu() {
@@ -106,18 +124,17 @@ public class FoodTruckApp {
 			System.out.println("Please choose an option from the  menu.");
 			System.out.println();
 
-		System.out.println("///////////////////////////////////////////////////////");
-		System.out.println("/                                                     /");
-		System.out.println("/                  - Main Menu -                      /");
-		System.out.println("/                                                     /");
-		System.out.println("/   1: Print a list of all the existing food trucks.  /");
-		System.out.println("/   2: See the average rating of all food trucks.      /");
-		System.out.println("/   3: Display the highest rated food truck.          /");
-		System.out.println("/   4: Quit the program                               /");
-		System.out.println("/                                                     /");
-		System.out.println("///////////////////////////////////////////////////////");
-		userInput = sc.nextInt();
-
+			System.out.println("///////////////////////////////////////////////////////");
+			System.out.println("/                                                     /");
+			System.out.println("/                  - Main Menu -                      /");
+			System.out.println("/                                                     /");
+			System.out.println("/   1: Print a list of all the existing food trucks.  /");
+			System.out.println("/   2: See the average rating of all food trucks.     /");
+			System.out.println("/   3: Display the highest rated food truck.          /");
+			System.out.println("/   4: Quit the program                               /");
+			System.out.println("/                                                     /");
+			System.out.println("///////////////////////////////////////////////////////");
+			userInput = sc.nextInt();
 
 			// for some reason i am getting an infinite loop no matter what case i choose
 
@@ -150,7 +167,6 @@ public class FoodTruckApp {
 				break;
 			}
 		}
-		
 
 //		} while (userInput != 4);
 
@@ -158,6 +174,12 @@ public class FoodTruckApp {
 
 	public void listOfFoodTrucks() {
 		System.out.println("In list of trucks.");
+		for (int i = 0; i < foodTrucks.length; i++) {
+			if (!(foodTrucks[i] == null)) {
+				System.out.println(foodTrucks[i].toString());
+			}
+
+		}
 
 	}
 
@@ -183,8 +205,8 @@ public class FoodTruckApp {
 	public void quitProgram() {
 		System.out.println("App terminating...");
 		System.out.println("Have a Wonderful Day!");
-		//added system.exit because my loop wasn't ending when the user pressed 4.
+		// added system.exit because my loop wasn't ending when the user pressed 4.
 		System.exit(0);
-		
+
 	}
 }
