@@ -7,9 +7,10 @@ import com.skilldistillery.foodtruck.entities.FoodTruck;
 public class FoodTruckApp {
 	Scanner sc = new Scanner(System.in);
 	FoodTruck[] foodTrucks = new FoodTruck[5];
-	FoodTruck truck;
+
 	private int rating;
-	private int count = 0;
+
+//	private int count = 0;
 	private int userInput = 1;
 	private int highestRate;
 	private double averageRate;
@@ -66,20 +67,20 @@ public class FoodTruckApp {
 
 	public void addFoodTruck() {
 
-		String name;
 		String foodType;
-		String nextTruck;
-		String response;
+
+		int id;
 
 		for (int i = 0; i < foodTrucks.length; i++) {
+			id = i + 1;
 			System.out.println();
 			System.out.println("Add a food truck or enter quit to see the main menu (add/quit)");
-			nextTruck = sc.nextLine();
-			
-			if (nextTruck.equalsIgnoreCase("quit")) {
+			String name = sc.nextLine();
+
+			if (name.equalsIgnoreCase("quit")) {
 				mainMenu();
-				
-			} else if(nextTruck.equalsIgnoreCase("add")) {
+
+			} else if (name.equalsIgnoreCase("add")) {
 			}
 //			} else {
 //				System.out.println("Invalid response. Please use (add/quit)");
@@ -93,22 +94,21 @@ public class FoodTruckApp {
 				System.out.println("Please enter the type of food that this truck served: ");
 				foodType = sc.nextLine();
 
-				System.out.println("Please enter a rating based upon the satisfaction of your dining experience \n\n"
-						+ "The rating system is numerical: \n\n"
-						+ "1: Extremely dissastisfied \n"
-					    + "2: Satisfied \n"
-						+ "3: Excellent!  \n"
-						+ "4: Perfection!");
+				System.out.println("Please enter a rating based upon the satisfaction of your dining experience \n"
+						+ "The rating system is numerical: \n" + "1: Extremely dissastisfied (\u2b50) \n" + 
+						"2: Satisfied (\u2b50\u2b50)\n"
+						+ "3: Great!  (\u2b50\u2b50\u2b50)  \n" + 
+						"4: Excellent! (\u2b50\u2b50\u2b50\u2b50)  \n"
+						+ "5: Perfection (\u2b50\u2b50\u2b50\u2b50\u2b50)");
 				rating = sc.nextInt();
-				
 
-				FoodTruck truck = new FoodTruck(name, foodType, rating);
+				FoodTruck truck = new FoodTruck(name, foodType, rating, id);
 				foodTrucks[i] = truck;
 
-			}
-			if (nextTruck.equalsIgnoreCase("quit")) {
-				break;
-
+//			}
+				if (name.equalsIgnoreCase("quit")) {
+					break;
+				}
 			} else if (name.equalsIgnoreCase("quit")) {
 				break;
 			}
@@ -141,21 +141,21 @@ public class FoodTruckApp {
 //		do {
 			switch (userInput) {
 			case 1:
-				System.out.println("This is a list of all of the food trucks you dined at today:");
 				System.out.println();
+				System.out.println("This is a list of all of the food trucks you dined at today:");
 				listOfFoodTrucks();
 				break;
 
 			case 2:
-				System.out.println("This is the average rating of all of the food trucks you dined at today:");
 				System.out.println();
-				averageRating();
+				System.out.println("This is the average rating of all of the food trucks you dined at today: "
+						+ averageRating(foodTrucks));
 				break;
 
 			case 3:
-				System.out.println("This is the highest rated food truck that you dined at today:");
+				System.out.println("This is the highest rated food truck that you dined at today: \n" + highestRated(foodTrucks));
 				System.out.println();
-				highestRated();
+
 				break;
 
 			case 4:
@@ -183,24 +183,47 @@ public class FoodTruckApp {
 
 	}
 
-	public double averageRating() {
+	public double averageRating(FoodTruck[] ratings) {
+		double avg = 0;
+		double sum = 0;
+		int count = 0;
 
-		// initial test code to make sure all user input follows the correct path
-
-		System.out.println("In average rating");
-		averageRate = 2.2;
-		return averageRate;
-
+		for (int r = 0; r < ratings.length; r++) {
+			if (ratings[r] != null) {
+				double avgRate = ratings[r].getRating();
+				sum = sum + avgRate;
+				count = r + 1;
+			}
+		}
+		avg = sum / count;
+		return avg;
 	}
 
-	public int highestRated() {
+	// initial test code to make sure all user input follows the correct path
+//
+//		System.out.println("In average rating");
+//		averageRate = 2.2;
+//		return averageRate;
 
-		// initial test code to make sure all user input follows the correct path
+	public FoodTruck highestRated(FoodTruck[] foodTrucks) {
+		int i = 0;
+		FoodTruck highestRate = foodTrucks[0];
+		while (i < 4) {
+			if (foodTrucks[i] != null) {
+				if (foodTrucks[i].getRating() > highestRate.getRating()) {
+					highestRate = foodTrucks[i];
+				}
+			}
+			i++;
+		}
 
-		System.out.println("In highest rated");
-		int highestRate = 3;
 		return highestRate;
 	}
+	// initial test code to make sure all user input follows the correct path
+//
+//		System.out.println("In highest rated");
+//		int highestRate = 3;
+//		return highestRate;
 
 	public void quitProgram() {
 		System.out.println("App terminating...");

@@ -5,19 +5,19 @@ public class FoodTruck {
 	private int rating;
 	private String nameTruck;
 	private String foodType;
-	private int idNum;
-	private int count = 1;
+	private int idNum = 0;
+	private static int count = 1;
 
 
 	public FoodTruck() {
 
 	}
 
-	public FoodTruck(String nameTruck, String foodType, int rating) {
-		this.idNum = count++;
+	public FoodTruck(String nameTruck, String foodType, int rating, int idNum) {
 		this.nameTruck = nameTruck;
 		this.foodType = foodType;
 		this.rating = rating;
+		this.idNum = count++;
 		
 		
 	}
@@ -61,10 +61,30 @@ public class FoodTruck {
 	public String toString() {
 		return "FoodTruck [Name:  " + nameTruck + 
 				", Type Of Food: " + foodType + 
-				", Rating: " + rating +
+				", Rating: " + starRating(rating) +
 				", ID: "+ idNum + "]";
 	}
-
+public String starRating(int rating) {
+	String stars = "";
+	switch (this.rating) {
+	case 1:
+		stars = "\u2b50";
+		return stars;
+	case 2:
+		stars = "\u2b50\u2b50";
+		return stars;
+	case 3:
+		stars = "\u2b50\u2b50\u2b50";
+		return stars;
+	case 4:
+		stars = "\u2b50\u2b50\u2b50\u2b50";
+		return stars;
+	case 5:
+		stars = "\u2b50\u2b50\u2b50\u2b50\u2b50";
+		return stars;
+	}
+	return stars;
+}
 	
 
 }
