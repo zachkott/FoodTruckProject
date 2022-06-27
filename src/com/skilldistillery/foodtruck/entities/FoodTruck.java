@@ -8,21 +8,23 @@ public class FoodTruck {
 	private int idNum = 0;
 	private static int count = 1;
 
-
+	// No arg constructor
 	public FoodTruck() {
 
 	}
 
+	// Constructor of FoodTruck that returns the name, type of food, rating and
+	// unique ID.
 	public FoodTruck(String nameTruck, String foodType, int rating, int idNum) {
 		this.nameTruck = nameTruck;
 		this.foodType = foodType;
 		this.rating = rating;
 		this.idNum = count++;
-		
-		
+
 	}
-//These are all of the getters and setters for rating, 
-//	averageRating, nameTruck, foodType, and idNum
+	
+// These are all of the getters and setters for rating, 
+//	averageRating, nameTruck, foodType, and idNum.
 
 	public int getRating() {
 		return rating;
@@ -32,7 +34,6 @@ public class FoodTruck {
 		this.rating = rating;
 	}
 
-	
 	public String getNameTruck() {
 		return nameTruck;
 	}
@@ -59,32 +60,32 @@ public class FoodTruck {
 
 	@Override
 	public String toString() {
-		return "FoodTruck [Name:  " + nameTruck + 
-				", Type Of Food: " + foodType + 
-				", Rating: " + starRating(rating) +
-				", ID: "+ idNum + "]";
+		return "FoodTruck [Name:  " + nameTruck + ", Type Of Food: " + foodType + ", Rating: " + starRating(rating)
+				+ ", ID: " + idNum + "]";
 	}
-public String starRating(int rating) {
-	String stars = "";
-	switch (this.rating) {
-	case 1:
-		stars = "\u2b50";
-		return stars;
-	case 2:
-		stars = "\u2b50\u2b50";
-		return stars;
-	case 3:
-		stars = "\u2b50\u2b50\u2b50";
-		return stars;
-	case 4:
-		stars = "\u2b50\u2b50\u2b50\u2b50";
-		return stars;
-	case 5:
-		stars = "\u2b50\u2b50\u2b50\u2b50\u2b50";
-		return stars;
-	}
-	return stars;
-}
 	
+	
+	// Added starRating method that converts the users rating into star emoji.
+	public String starRating(int rating) {
+		String stars = "";
+		switch (this.rating) {
+		case 1:
+			stars = "\u2b50";
+			return stars;
+		case 2:
+			stars = "\u2b50\u2b50";
+			return stars;
+		case 3:
+			stars = "\u2b50\u2b50\u2b50";
+			return stars;
+		case 4:
+			stars = "\u2b50\u2b50\u2b50\u2b50";
+			return stars;
+		case 5:
+			stars = "\u2b50\u2b50\u2b50\u2b50\u2b50";
+			return stars;
+		}
+		return stars;
+	}
 
 }
