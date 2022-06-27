@@ -4,26 +4,26 @@ import java.util.Scanner;
 
 import com.skilldistillery.foodtruck.entities.FoodTruck;
 
+			//  Week 2 Food Truck Project.
+			// Zachary Kotterer.		
+
 public class FoodTruckApp {
 	Scanner sc = new Scanner(System.in);
 	FoodTruck[] foodTrucks = new FoodTruck[5];
 
 	private int rating;
-
-//	private int count = 0;
 	private int userInput = 1;
-	private int highestRate;
-	private double averageRate;
+
 
 	public static void main(String[] args) {
 		FoodTruckApp fta = new FoodTruckApp();
 		fta.welcome();
 
-		// Welcome message *possibly change this to a method and call the method
-		// WelcomeMessage()
-
+		
 	}
-
+	
+    // This is the first method that will be called in this application.
+	// It is the only method that will be called in the main method.
 	public void welcome() {
 		String answer;
 		boolean choice;
@@ -58,25 +58,32 @@ public class FoodTruckApp {
 				System.out.println("Have a good Day!");
 				break;
 			}
-//			 else {
-//				System.out.println("Invalid response. Please try again.");
-//			}
+
 		}
 
 	}
 
+	// This method will  be called if the user enters yes in the welcome menu.
+	// This is the method that confused me the most. I felt very repetitive  with my if else-statements.
 	public void addFoodTruck() {
 
+		// A total of 3 local variables to collect all the food truck info and assign it to an index value
+		// in the  foodTrucks array.
 		String foodType;
-
 		int id;
-
+		
+		// This for loop will execute through each index of the array and store its info as well as assign
+		// it a unique  ID.
+		
 		for (int i = 0; i < foodTrucks.length; i++) {
 			id = i + 1;
+			
 			System.out.println();
 			System.out.println("Add a food truck or enter quit to see the main menu (add/quit)");
 			String name = sc.nextLine();
 
+			// There are various nested if-else statements within this for loop that will cause the loop to break if 
+			// the word quit is entered.
 			if (name.equalsIgnoreCase("quit")) {
 				mainMenu();
 
@@ -95,17 +102,16 @@ public class FoodTruckApp {
 				foodType = sc.nextLine();
 
 				System.out.println("Please enter a rating based upon the satisfaction of your dining experience \n"
-						+ "The rating system is numerical: \n" + "1: Extremely dissastisfied (\u2b50) \n" + 
-						"2: Satisfied (\u2b50\u2b50)\n"
-						+ "3: Great!  (\u2b50\u2b50\u2b50)  \n" + 
-						"4: Excellent! (\u2b50\u2b50\u2b50\u2b50)  \n"
+						+ "The rating system is numerical: \n" + "1: Extremely dissastisfied (\u2b50) \n"
+						+ "2: Satisfied (\u2b50\u2b50)\n" + "3: Great!  (\u2b50\u2b50\u2b50)  \n"
+						+ "4: Excellent! (\u2b50\u2b50\u2b50\u2b50)  \n"
 						+ "5: Perfection (\u2b50\u2b50\u2b50\u2b50\u2b50)");
 				rating = sc.nextInt();
 
 				FoodTruck truck = new FoodTruck(name, foodType, rating, id);
 				foodTrucks[i] = truck;
 
-//			}
+
 				if (name.equalsIgnoreCase("quit")) {
 					break;
 				}
@@ -116,14 +122,19 @@ public class FoodTruckApp {
 		}
 		mainMenu();
 	}
-
+	
+	
+	// This method will be called  when the user enters the word quit as a food truck name
 	public void mainMenu() {
-//System.out.println("In main menu");
+
+		// This while loop with execute until the user enters a 4, in which case the loop will be  broken
+		// and the quitProgram  method will be called to terminate the program.
 		while (userInput != 4) {
 			System.out.println();
 			System.out.println("Please choose an option from the  menu.");
 			System.out.println();
 
+			// W.I.P
 			System.out.println("///////////////////////////////////////////////////////");
 			System.out.println("/                                                     /");
 			System.out.println("/                  - Main Menu -                      /");
@@ -136,9 +147,9 @@ public class FoodTruckApp {
 			System.out.println("///////////////////////////////////////////////////////");
 			userInput = sc.nextInt();
 
-			// for some reason i am getting an infinite loop no matter what case i choose
+			// for some reason I am getting an infinite loop no matter what case I choose *fixed with System.exit(0)
 
-//		do {
+
 			switch (userInput) {
 			case 1:
 				System.out.println();
@@ -148,12 +159,15 @@ public class FoodTruckApp {
 
 			case 2:
 				System.out.println();
-				System.out.println("This is the average rating of all of the food trucks you dined at today: "
+				System.out.println("This is the average rating of all of the food trucks you dined at today: \n"
+						+ ""
 						+ averageRating(foodTrucks));
 				break;
 
 			case 3:
-				System.out.println("This is the highest rated food truck that you dined at today: \n" + highestRated(foodTrucks));
+				System.out.println(
+						"This is the highest rated food truck that you dined at today: \n" 
+						+ highestRated(foodTrucks));
 				System.out.println();
 
 				break;
@@ -168,9 +182,9 @@ public class FoodTruckApp {
 			}
 		}
 
-//		} while (userInput != 4);
-
 	}
+
+	// This is the method that will be called if the user enters option 1.
 
 	public void listOfFoodTrucks() {
 		System.out.println("In list of trucks.");
@@ -183,12 +197,21 @@ public class FoodTruckApp {
 
 	}
 
+	// This is the method that will be called if the user enters a 2
+	// This method will return a value of ratings from the foodTruck array
 	public double averageRating(FoodTruck[] ratings) {
+		
+		//Three local variables used to calculate the sum of all ratings and divide it by the current count.
 		double avg = 0;
 		double sum = 0;
 		int count = 0;
 
+		// This for loop will run through the index values  stored in the foodTruck array  until 
+		// the index value equals the stored value.
 		for (int r = 0; r < ratings.length; r++) {
+			
+			// Nested if statement that runs through each index and finds the sum of all the ratings 
+			// and divides it by the count to determine the average rating.
 			if (ratings[r] != null) {
 				double avgRate = ratings[r].getRating();
 				sum = sum + avgRate;
@@ -199,16 +222,18 @@ public class FoodTruckApp {
 		return avg;
 	}
 
-	// initial test code to make sure all user input follows the correct path
-//
-//		System.out.println("In average rating");
-//		averageRate = 2.2;
-//		return averageRate;
-
+	// This is the method that will be called if the user enters a 3
 	public FoodTruck highestRated(FoodTruck[] foodTrucks) {
-		int i = 0;
+		
 		FoodTruck highestRate = foodTrucks[0];
-		while (i < 4) {
+		int i = 0;
+		
+		// A while loop that executes through each index of the foodTrucks array until if gets to the max index
+		while (i < 5) {
+			
+			// Nested if-statements inside the while loop that go through the 
+			// index and call the getRating method created in FoodTruck.
+			// Once the loop ends the index with the highest value will be returned
 			if (foodTrucks[i] != null) {
 				if (foodTrucks[i].getRating() > highestRate.getRating()) {
 					highestRate = foodTrucks[i];
@@ -219,16 +244,13 @@ public class FoodTruckApp {
 
 		return highestRate;
 	}
-	// initial test code to make sure all user input follows the correct path
-//
-//		System.out.println("In highest rated");
-//		int highestRate = 3;
-//		return highestRate;
 
+	// If the user enters a 4 this method will  be called to terminate the program.
 	public void quitProgram() {
 		System.out.println("App terminating...");
 		System.out.println("Have a Wonderful Day!");
-		// added system.exit because my loop wasn't ending when the user pressed 4.
+		
+		// I added system.exit because my loop wasn't ending when the user pressed 4.
 		System.exit(0);
 
 	}
